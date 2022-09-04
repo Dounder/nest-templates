@@ -26,11 +26,14 @@ export class AuthService {
     const { password, ...userData } = createUserDto;
 
     try {
-      await this.userModel.create({
+      const user = await this.userModel.create({
         ...userData,
         password: bcrypt.hashSync(password, 10),
       });
-      return { msg: `User created` };
+      return {
+        user: { ...userData },
+        token: this.getJwtToken({ id: user.id }),
+      };
     } catch (error) {
       handleDBErrors(error);
     }
