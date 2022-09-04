@@ -20,3 +20,4 @@ npm Install
 
 - Nest
 - Mongo DB
+- Passport for authentication
