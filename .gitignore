@@ -2,8 +2,8 @@
 .env
 .env.*
 
-# Mongo volume
-/mongo
+# Postgres volume
+/postgres
 
 # yarn
 yarn.lock
