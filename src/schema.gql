@@ -1,0 +1,49 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updateAt: DateTime!
+  deletedAt: DateTime
+  username: String!
+  email: String!
+  roles: [UserRoles!]!
+  lastUpdatedBy: User
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Valid roles for users"""
+enum UserRoles {
+  admin
+  user
+}
+
+type Query {
+  users(roles: [UserRoles!] = [], offset: Int = 0, limit: Int = 10, search: String): [User!]!
+  user(id: ID!): User!
+}
+
+type Mutation {
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: ID!): User!
+}
+
+input UpdateUserInput {
+  """User username"""
+  username: String
+
+  """User email"""
+  email: String
+
+  """User password"""
+  password: String
+  id: ID!
+  roles: [UserRoles!]
+  deletedAt: DateTime
+}
