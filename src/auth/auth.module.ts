@@ -1,3 +1,6 @@
+import { Token } from './entities/token.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MailModule } from './../mail/mail.module';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UsersModule } from './../users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -9,7 +12,7 @@ import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [AuthController],
-  exports: [JwtStrategy, PassportModule, JwtModule],
+  exports: [JwtStrategy, PassportModule, JwtModule, TypeOrmModule],
   providers: [AuthService, JwtStrategy],
   imports: [
     ConfigModule,
@@ -25,7 +28,11 @@ import { JwtModule } from '@nestjs/jwt';
       }),
     }),
 
+    TypeOrmModule.forFeature([Token]),
+
     UsersModule,
+
+    MailModule,
   ],
 })
 export class AuthModule {}

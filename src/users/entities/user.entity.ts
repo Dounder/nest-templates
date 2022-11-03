@@ -1,6 +1,14 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+} from 'typeorm';
 
+import { Token } from './../../auth/entities/token.entity';
 import { BaseEntity } from './../../common/entities/base.entity';
 import { UserRoles } from './../enum/UserRoles.enum';
 
@@ -36,4 +44,7 @@ export class User extends BaseEntity {
   @JoinColumn({ name: 'lastUpdatedBy' })
   @Field(() => User, { nullable: true })
   lastUpdatedBy?: User;
+
+  @OneToOne(() => Token, (token) => token.id)
+  token: string;
 }

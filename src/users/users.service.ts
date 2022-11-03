@@ -74,10 +74,17 @@ export class UsersService {
   async update(
     id: string,
     updateUserInput: UpdateUserInput,
-    adminUser: User,
+    adminUser?: User,
   ): Promise<User> {
     try {
       const user = await this.findOneByTerm(id);
+
+      if (updateUserInput.password)
+        updateUserInput.password = bcrypt.hashSync(
+          updateUserInput.password,
+          10,
+        );
+
       user.lastUpdatedBy = adminUser;
       return await this.userRepository.save({ ...user, ...updateUserInput });
     } catch (error) {

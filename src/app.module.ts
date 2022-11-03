@@ -12,6 +12,7 @@ import { CommonModule } from './common/common.module';
 import { ENV_CONFIGURATION } from './config/app.config';
 import { JoiValidationSchema } from './config/joi.config';
 import { UsersModule } from './users/users.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     CommonModule,
+    MailModule,
   ],
   controllers: [],
   providers: [],
